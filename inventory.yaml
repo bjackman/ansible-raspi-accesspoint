@@ -1,0 +1,4 @@
+all:
+  hosts:
+    pi-vpn:            # This is the hostname of the Pi. This assumes DNS works on your LAN.
+      ansible_user: pi # This is the username to log into the Pi with. (This is the Raspbian default)

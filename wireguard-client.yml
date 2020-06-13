@@ -1,0 +1,8 @@
+
+---
+- name: Setup {{ target }} as a Wireguard client
+  hosts: "{{ target }}"
+  become: yes
+  roles:
+    - role: wireguard-client
+      tags: wireguard-client

@@ -1,0 +1,31 @@
+---
+# https://github.com/trailofbits/algo/blob/master/docs/client-linux-wireguard.md
+
+# Without this task, `apt update` fails with `The following signatures couldn't
+# be verified because the public key is not available: NO_PUBKEY
+# 04EE7237B7D453EC NO_PUBKEY 648ACFD622F3D138`.
+#
+# Why the fuck is the keyserver on ubuntu.com? How the fuck are you supposed to
+# figure this out? Why the fuck isn't they keyring packaged with Debian? Who the
+# fuck knows. I fucking hate computers. Debian and Ansible are both fractals of
+# nightmarish fuckery.
+- name: Add keys for reading from backports repo
+  with_items:
+    - E0B11894F66AEC98
+    - DC30D7C23CBBABEE
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: "{{ item }}"
+- name: Add backports repo
+  apt_repository:
+    repo: deb http://deb.debian.org/debian buster-backports main
+    state: present
+    filename: backports-wireguard
+    update_cache: false
+- name: Install wireguard & openresolv
+  with_items:
+    - openresolv
+    - wireguard
+  apt:
+    name: "{{ item }}"
+    state: present
