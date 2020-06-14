@@ -37,8 +37,27 @@
 - name: Persist firewall rules
   shell: netfilter-persistent save
 
-- name: Configure dnsmasq (DHCP & DNS
+- name: Configure dnsmasq (DHCP & DNS)
   template:
     src: templates/dnsmasq.j2
     dest: /etc/dnsmasq.conf
     backup: true
+
+# I haven't really tested this, I already set the regulatory zone with
+# raspi-config when I actually did this. I guess that this (in combination with
+# country_code) would be enough that it would work without doing that, but I'm
+# not certain.
+- name: Unblock WiFi
+  shell: rfkill unblock wlan
+
+- name: Configure hostapd
+  template:
+    src: templates/hostapd.j2
+    dest: /etc/hostapd/hostapd.conf
+
+- name: Enable hostapd service
+  systemd:
+    name: hostapd
+    enabled: true
+    masked: false
+    state: restarted
