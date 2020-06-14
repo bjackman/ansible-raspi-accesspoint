@@ -23,9 +23,6 @@
     filename: backports-wireguard
     update_cache: false
 - name: Install wireguard & openresolv
-  with_items:
-    - openresolv
-    - wireguard
   apt:
-    name: "{{ item }}"
+    name: [openresolv, wireguard]
     state: present
