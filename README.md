@@ -23,3 +23,12 @@
 - Set up the remaining stuff in group_vars/all.yaml. Make sure that the subnet
   for your Ethernet LAN won't overlap with the WLAN.
 - Run `ansible-playbook -i inventory.yaml  -e target=pi-vpn access-point.yml`
+- Reboot the Pi (the playbook must be missing a systemd command. Not sure).
+
+I couldn't get 5Ghz (hw_mode=a) to work, I always got "Configured channel (%d)
+not found from the channel list of current mode (2) IEEE 802.11a". Haven't
+really investigated.
+
+I also couldn't get Automatic Channel Selection (channel=0) to work, hostapd
+just shut down without any error message, and return code 0. Haven't really
+investigated.
