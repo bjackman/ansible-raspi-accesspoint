@@ -18,3 +18,27 @@
   template:
     src: templates/dhcpcd.j2
     dest: /etc/dhcpcd.conf
+
+- name: Enable IP forwarding
+  sysctl:
+    name: net.ipv4.ip_forward
+    sysctl_file: /etc/sysctl.d/routed-ap.conf
+    value: "1"
+
+- name: Enable IP masquerading
+  # sudo iptables -t nat -A POSTROUTING -o wg0 -j MASQUERADE
+  # (Original says to use eth0 - I'm _guessing_ we want wg0 instead)
+  iptables:
+    table: nat
+    chain: POSTROUTING
+    out_interface: "{{ wireguard_adapter }}"
+    jump: MASQUERADE
+
+- name: Persist firewall rules
+  shell: netfilter-persistent save
+
+- name: Configure dnsmasq (DHCP & DNS
+  template:
+    src: templates/dnsmasq.j2
+    dest: /etc/dnsmasq.conf
+    backup: true

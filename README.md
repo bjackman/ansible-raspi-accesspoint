@@ -22,3 +22,4 @@
 # Set up WiFi AP
 - Set up the remaining stuff in group_vars/all.yaml. Make sure that the subnet
   for your Ethernet LAN won't overlap with the WLAN.
+- Run `ansible-playbook -i inventory.yaml  -e target=pi-vpn access-point.yml`

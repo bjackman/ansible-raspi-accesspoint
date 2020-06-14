@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+
+interface={{ wifi_adapter }}
+dhcp-range={{ ip_range.start }},{{ ip_range.end }},{{ subnet_mask }},24h
+domain=wlan                   # Local wireless DNS domain
+address=/gw.wlan/{{ own_ip }} # Alias for this router
