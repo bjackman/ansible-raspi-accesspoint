@@ -25,6 +25,13 @@
     state: present
     filename: backports-wireguard
     update_cache: false
+# Without this task, kernel headers aren't installed which means the
+# wireguard-dkms package doesn't install the wireguard kmod. AFAICT this
+# Raspbian being crap.
+- name: Install kernel headers
+  apt:
+    name: raspberrypi-kernel-headers
+    state: present
 - name: Install wireguard & openresolv
   apt:
     name: [openresolv, wireguard]
