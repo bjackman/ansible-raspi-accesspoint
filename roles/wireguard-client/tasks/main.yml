@@ -1,4 +1,7 @@
 ---
+# Installs and sets up wireguard.
+# Requires wireguard_conf_local_path to be set.
+#
 # https://github.com/trailofbits/algo/blob/master/docs/client-linux-wireguard.md
 
 # Without this task, `apt update` fails with `The following signatures couldn't
@@ -26,3 +29,10 @@
   apt:
     name: [openresolv, wireguard]
     state: present
+- name: Install wireguard configuration
+  copy:
+    src: "{{ wireguard_conf_local_path | mandatory }}"
+    dest: /etc/wireguard/wg0.conf
+    owner: root
+    mode: 0600
+

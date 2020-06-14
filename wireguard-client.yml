@@ -6,3 +6,5 @@
   roles:
     - role: wireguard-client
       tags: wireguard-client
+      vars:
+        wireguard_conf_local_path: "algo/configs/{{ vpn_server }}/wireguard/{{ vpn_user }}.conf"

@@ -1,5 +1,15 @@
 ---
 # -|----------------------------------------------------------------------------
+#  | VPN Settings
+# -|----------------------------------------------------------------------------
+#  |     - `vpn_server` is the IP address/hostname of the server (there sould be
+#  |       a directory called algo/configs/${{ vpn_server }})
+#  |     - `vpn_user`  is the name of the user that the Pi should connect as.
+#  |
+vpn_server:
+vpn_user: pi
+
+# -|----------------------------------------------------------------------------
 #  | Device Settings
 # -|----------------------------------------------------------------------------
 #  |  Set the hardware adapters here
