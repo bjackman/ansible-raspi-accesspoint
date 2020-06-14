@@ -1,8 +1,4 @@
 ---
-- name: Set hostname to {{ hostname }}
-  hostname:
-    name: "{{ hostname }}"
-
 - name: Install required software packages
   apt:
     name: "{{ item }}"
