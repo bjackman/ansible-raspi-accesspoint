@@ -42,4 +42,9 @@
     dest: /etc/wireguard/wg0.conf
     owner: root
     mode: 0600
+- name: (Re)start & enable wireguard service
+  systemd:
+    name: wg-quick@wg0
+    state: restarted # Always restarts service
+    enabled: yes     # Start it on boot too
 

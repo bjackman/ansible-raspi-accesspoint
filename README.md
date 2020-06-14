@@ -13,3 +13,5 @@
 - Curse the Debian maintainers
 - Curse the Ansible maintainers
 - Curse whoever the fuck invented YAML
+- Run curl ipv4.icanhazip.com from the Pi. The result should match what you
+  configured for `vpn_server`.
